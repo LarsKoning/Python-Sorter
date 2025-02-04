@@ -18,18 +18,19 @@ filetype_dict = {
     'mp3': 'Music',
     'wav': 'Music',
     'zip': 'Archives',
-    'tar': 'Archives',
-    'pptx': 'Powerpoints',
+    'tar': 'Archives'
 }
 
 # Default folder for unknown file types
-default_folder = os.path.join(file_path, "Other")
+documents_path = os.path.expanduser('~/Documents')
+default_folder = os.path.join(documents_path, "Other")
 
 # Obtain all files in the designated folder
 files = [f for f in listdir(file_path) if isfile(join(file_path, f))]
 
 # Create necessary folders if they don't exist
 for folder in filetype_dict.values():
+    folder_path = os.path.join(documents_path, folder)
     folder_path = os.path.join(file_path, folder)
     if not os.path.exists(folder_path):
         os.mkdir(folder_path)
@@ -50,9 +51,9 @@ for i, file in enumerate(files, start=1):
 
     # Determine destination folder
     if filetype in filetype_dict:
-        dest_folder = os.path.join(file_path, filetype_dict[filetype])
+        dest_folder = os.path.join(documents_path, filetype_dict[filetype])
     else:
-        dest_folder = default_folder  # Move unknown files to "Other"
+        dest_folder = os.path.join(documents_path, "Other")  # Move unknown files to "Other"
 
     src_path = os.path.join(file_path, file)
     dest_path = os.path.join(dest_folder, file)
@@ -60,5 +61,6 @@ for i, file in enumerate(files, start=1):
     if simulate:
         print(f"Simulated: {src_path} >>> {dest_path}")  # Dry run log
     else:
-        shutil.move(src_path, dest_path)  # Move the file if simulate = false
+        # Uncomment the line below to actually move files
+        shutil.move(src_path, dest_path)  # Move the file
         print(f"{i}. {file} >>> Moved to {dest_folder}")
