@@ -10,16 +10,49 @@ file_path = os.path.expanduser('~/Downloads')  # Uses home directory dynamically
 filetype_dict = {
     'pdf': 'Documents',
     'docx': 'Documents',
-    'txt': 'Text_Files',
+    'doc': 'Documents',
+    'odt': 'Documents',
+
+    'xls': 'Spreadsheets',
+    'xlsx': 'Spreadsheets',
+    'csv': 'Spreadsheets',
+
+    'txt': 'Text Files',
+
     'jpg': 'Images',
+    'jpeg': 'Images',
+    'svg': 'Images',
+    'gif': 'Images',
+    'webp': 'Images',
+    'bmp': 'Images',
     'png': 'Images',
+    'tiff': 'Images',
+    'tif': 'Images',
+
     'mp4': 'Videos',
+    'avi': 'Videos',
     'mov': 'Videos',
-    'mp3': 'Music',
-    'wav': 'Music',
+    'flv': 'Videos',
+    'avchd': 'Videos',
+    'mkv': 'Videos',
+    'webm': 'Videos',
+
+    'mp3': 'Audio',
+    'wav': 'Audio',
+    'm4a': 'Audio',
+
+    'ppt': 'Presentations',
+    'pptx': 'Presentations',
+    'odp': 'Presentations',
+
     'zip': 'Archives',
-    'tar': 'Archives'
+    'tar': 'Archives',
+    'rar': 'Archives',
+    '7z': 'Archives',
 }
+
+# Dry Run Mode (Simulation)
+simulate = False  # Set to False to actually move files
 
 # Default folder for unknown file types
 documents_path = os.path.expanduser('~/Documents')
@@ -29,6 +62,7 @@ default_folder = os.path.join(documents_path, "Other")
 files = [f for f in listdir(file_path) if isfile(join(file_path, f))]
 
 # Create necessary folders if they don't exist
+
 for folder in filetype_dict.values():
     folder_path = os.path.join(documents_path, folder)
     folder_path = os.path.join(file_path, folder)
@@ -38,9 +72,6 @@ for folder in filetype_dict.values():
 # Create the "Other" folder if it doesn't exist
 if not os.path.exists(default_folder):
     os.mkdir(default_folder)
-
-# Dry Run Mode (Simulation)
-simulate = True  # Set to False to actually move files
 
 # Move files to designated folders or "Other"
 for i, file in enumerate(files, start=1):
