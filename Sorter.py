@@ -49,6 +49,17 @@ filetype_dict = {
     'tar': 'Archives',
     'rar': 'Archives',
     '7z': 'Archives',
+
+    'exe': 'Executables',
+    'msi': 'Executables',
+
+    'fbx': '3D Models',
+    'glb': '3D Models',
+    'ply': '3D Models',
+    'obj': '3D Models',
+    'stl': '3D Models',
+    'las': '3D Models',
+    'laz': '3D Models',
 }
 
 # Dry Run Mode (Simulation)
@@ -62,10 +73,8 @@ default_folder = os.path.join(documents_path, "Other")
 files = [f for f in listdir(file_path) if isfile(join(file_path, f))]
 
 # Create necessary folders if they don't exist
-
 for folder in filetype_dict.values():
     folder_path = os.path.join(documents_path, folder)
-    folder_path = os.path.join(file_path, folder)
     if not os.path.exists(folder_path):
         os.mkdir(folder_path)
 
